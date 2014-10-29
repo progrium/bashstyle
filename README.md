@@ -36,17 +36,18 @@ If you know what you're doing, you can bend or break some of these rules, but ge
 
 ## Best Practices and Tips
 
- * Use Bash variable substitution if possible before awk/sed
- * Generally use double quotes unless it makes more sense to use single quotes
+ * Use Bash variable substitution if possible before awk/sed.
+ * Generally use double quotes unless it makes more sense to use single quotes.
  * For simple conditionals, try using `&&` and `||`.
- * Put `then`, `do`, etc on same line, not newline
+ * Put `then`, `do`, etc on same line, not newline.
+ * Skip `[[ ... ]]` in your if-expression if you can test for exit code instead.
  * Use `.sh` or `.bash` extension if file is meant to be included/sourced. Never on executable script.
- * Put complex one-liners of `sed`, `perl`, etc in a standalone function with a descriptive name
+ * Put complex one-liners of `sed`, `perl`, etc in a standalone function with a descriptive name.
  * Good idea to include `[[ "$TRACE" ]] && set -x`
- * Avoid flag arguments and parsing, instead use optional environment instead
- * In large systems or for any CLI commands, add a description to functions 
-   * Use `declare desc="description"` at the top of functions, even above argument declaration
-   * This can be queried/extracted with a simple function using reflection
+ * Avoid flag arguments and parsing, instead use optional environment instead.
+ * In large systems or for any CLI commands, add a description to functions.
+   * Use `declare desc="description"` at the top of functions, even above argument declaration.
+   * This can be queried/extracted with a simple function using reflection.
  * No hard tabs?
  
 ## Good References and Help
@@ -60,7 +61,7 @@ If you know what you're doing, you can bend or break some of these rules, but ge
 
 ### Regular function with named arguments
 Defining functions with arguments
-```
+```bash
 regular_func() {
 	declare arg1="$1" arg2="$2" arg3="$3"
 
@@ -70,7 +71,7 @@ regular_func() {
 
 ### Variadic functions
 Defining functions with a final variadic argument
-```
+```bash
 variadic_func() {
 	local arg1="$1"; shift
 	local arg2="$1"; shift
@@ -78,6 +79,20 @@ variadic_func() {
 
 	# ...
 }
+```
+
+### Conditionals: Testing for exit code vs output
+
+```bash
+# Test for exit code (-q mutes output)
+if grep -q 'foo' somefile; then
+  ...
+fi
+
+# Test for output (-m1 limits to one result)
+if [ "$(grep -m1 'foo' somefile)" ]; then
+  ...
+fi
 ```
 
 ### More todo
