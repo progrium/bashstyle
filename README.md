@@ -90,7 +90,7 @@ if grep -q 'foo' somefile; then
 fi
 
 # Test for output (-m1 limits to one result)
-if [ "$(grep -m1 'foo' somefile)" ]; then
+if [[ "$(grep -m1 'foo' somefile)" ]]; then
   ...
 fi
 ```
