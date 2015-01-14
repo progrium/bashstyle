@@ -6,9 +6,9 @@ Bash is the JavaScript of systems programming. Although in some cases it's bette
  * It's neutral. Unlike Ruby, Python, JavaScript, or PHP, Bash offends equally across all communities. ;)
  * It's made to be glue. Write complex parts in C or Go (or whatever!), and glue them together with Bash.
 
-The same way people hated JavaScript before people got serious about it, Bash just needs to be used in a way that makes it feel like a real programming language. Part of this is establishing a consistent style and best practices.
-
 This document is how I write Bash and how I'd like collaborators to write Bash with me in my open source projects. It's based on a lot of experience and time collecting best practices. Most of them come from these [two](http://wiki.bash-hackers.org/scripting/obsolete) [articles](http://www.kfirlavi.com/blog/2012/11/14/defensive-bash-programming/), but here integrated, slightly modified, and focusing on the most bang for buck items. Plus some new stuff!
+
+Keep in mind this is not for general shell scripting, these are rules specifically for Bash and can take advantage of assumptions around Bash as the interpreter. 
 
 ## Big Rules
 
@@ -21,6 +21,7 @@ This document is how I write Bash and how I'd like collaborators to write Bash w
    * If script is also usable as library, call it using `[[ "$0" == "$BASH_SOURCE" ]] && main "$@"`
  * Always use `local` when setting variables, unless there is reason to use `declare`
    * Exception being rare cases when you are intentionally setting a variable in an outer scope.
+ * Variable names should be lowercase unless exported to environment.
  * Always use `set -eo pipefail`. Fail fast and be aware of exit codes. 
    * Use `|| true` on programs that you intentionally let exit non-zero.
  * Never use deprecated style. Most notably:
@@ -28,9 +29,12 @@ This document is how I write Bash and how I'd like collaborators to write Bash w
    * Always use `[[` instead of `[` or `test`
    * Never use backticks, use `$( ... )`
    * See http://wiki.bash-hackers.org/scripting/obsolete for more
+ * Prefer absolute paths (leverage $PWD), always qualify relative paths with `./`.
  * Always use `declare` and name variable arguments at the top of functions that are more than 2-lines
    * Example: `declare arg1="$1" arg2="$2"`. You'll write/see this a lot now.
    * The exception is when defining variadic functions. See below.
+ * Use `mktemp` for temporary files, always cleanup with a `trap`.
+ * Warnings and errors should go to STDERR, anything parsable should go to STDOUT.
 
 If you know what you're doing, you can bend or break some of these rules, but generally they will be right and be extremely helpful.
 
@@ -39,15 +43,20 @@ If you know what you're doing, you can bend or break some of these rules, but ge
  * Use Bash variable substitution if possible before awk/sed.
  * Generally use double quotes unless it makes more sense to use single quotes.
  * For simple conditionals, try using `&&` and `||`.
+ * Don't be afraid of `printf`, it's more powerful than `echo`.
  * Put `then`, `do`, etc on same line, not newline.
  * Skip `[[ ... ]]` in your if-expression if you can test for exit code instead.
  * Use `.sh` or `.bash` extension if file is meant to be included/sourced. Never on executable script.
  * Put complex one-liners of `sed`, `perl`, etc in a standalone function with a descriptive name.
  * Good idea to include `[[ "$TRACE" ]] && set -x`
- * Avoid flag arguments and parsing, instead use optional environment instead.
+ * Design for simplicity and obvious usage.
+   * Avoid option flags and parsing, try optional environment variables instead.
+   * Use subcommands for necessary different "modes".
  * In large systems or for any CLI commands, add a description to functions.
    * Use `declare desc="description"` at the top of functions, even above argument declaration.
    * This can be queried/extracted with a simple function using reflection.
+ * Be conscious of the need for portability. Bash to run in a container can make more assumptions than Bash made to run on multiple platforms.
+ * When expecting or exporting environment, consider namespacing variables when subshells may be involved. 
  * Use hard tabs. Heredocs ignore leading tabs, allowing better indentation.
  
 ## Good References and Help
