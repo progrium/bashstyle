@@ -1,6 +1,6 @@
 # progrium/bashstyle
 
-Bash is like the JavaScript of systems programming. Although in some cases it's better to use a systems language like C or Go, Bash is actually an ideal systems language for many smaller POSIX-oriented or command line tasks. Here's three quick reasons why:
+Bash is the JavaScript of systems programming. Although in some cases it's better to use a systems language like C or Go, Bash is an ideal systems language for smaller POSIX-oriented or command line tasks. Here's three quick reasons why:
 
  * It's everywhere. Like JavaScript for the web, Bash is already there ready for systems programming.
  * It's neutral. Unlike Ruby, Python, JavaScript, or PHP, Bash offends equally across all communities. ;)
@@ -48,7 +48,7 @@ If you know what you're doing, you can bend or break some of these rules, but ge
  * In large systems or for any CLI commands, add a description to functions.
    * Use `declare desc="description"` at the top of functions, even above argument declaration.
    * This can be queried/extracted with a simple function using reflection.
- * No hard tabs?
+ * Use hard tabs. Heredocs ignore leading tabs, allowing better indentation.
  
 ## Good References and Help
 
@@ -56,6 +56,7 @@ If you know what you're doing, you can bend or break some of these rules, but ge
    * Especially http://wiki.bash-hackers.org/scripting/newbie_traps
  * http://tldp.org/LDP/abs/html/
  * Tips for interactive Bash: http://samrowe.com/wordpress/advancing-in-the-bash-shell/
+ * For reference, [Google's Bash styleguide](http://google-styleguide.googlecode.com/svn/trunk/shell.xml)
 
 ## Examples
 
