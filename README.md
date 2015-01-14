@@ -31,10 +31,11 @@ Keep in mind this is not for general shell scripting, these are rules specifical
    * See http://wiki.bash-hackers.org/scripting/obsolete for more
  * Prefer absolute paths (leverage $PWD), always qualify relative paths with `./`.
  * Always use `declare` and name variable arguments at the top of functions that are more than 2-lines
-   * Example: `declare arg1="$1" arg2="$2"`. You'll write/see this a lot now.
+   * Example: `declare arg1="$1" arg2="$2"`
    * The exception is when defining variadic functions. See below.
  * Use `mktemp` for temporary files, always cleanup with a `trap`.
  * Warnings and errors should go to STDERR, anything parsable should go to STDOUT.
+ * Try to localize `shopt` usage and disable option when finished.
 
 If you know what you're doing, you can bend or break some of these rules, but generally they will be right and be extremely helpful.
 
