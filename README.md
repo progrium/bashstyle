@@ -85,7 +85,7 @@ Defining functions with a final variadic argument
 ```bash
 variadic_func() {
 	local arg1="$1"; shift
-	local arg2="$2"; shift
+	local arg2="$1"; shift
 	local rest="$@"
 
 	# ...
