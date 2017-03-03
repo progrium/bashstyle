@@ -67,6 +67,7 @@ If you know what you're doing, you can bend or break some of these rules, but ge
  * http://tldp.org/LDP/abs/html/
  * Tips for interactive Bash: http://samrowe.com/wordpress/advancing-in-the-bash-shell/
  * For reference, [Google's Bash styleguide](http://google-styleguide.googlecode.com/svn/trunk/shell.xml)
+ * For linting, [shellcheck](https://github.com/koalaman/shellcheck)
 
 ## Examples
 
