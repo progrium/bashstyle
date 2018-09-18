@@ -55,7 +55,10 @@ If you know what you're doing, you can bend or break some of these rules, but ge
    * Use subcommands for necessary different "modes".
  * In large systems or for any CLI commands, add a description to functions.
    * Use `declare desc="description"` at the top of functions, even above argument declaration.
-   * This can be queried/extracted with a simple function using reflection.
+   * This can be queried/extracted using reflection. For example:
+   ```
+   eval $(type FUNCTION_NAME | grep 'declare desc=') && echo "$desc"
+   ```
  * Be conscious of the need for portability. Bash to run in a container can make more assumptions than Bash made to run on multiple platforms.
  * When expecting or exporting environment, consider namespacing variables when subshells may be involved. 
  * Use hard tabs. Heredocs ignore leading tabs, allowing better indentation.
