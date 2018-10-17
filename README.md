@@ -69,7 +69,7 @@ If you know what you're doing, you can bend or break some of these rules, but ge
    * Especially http://wiki.bash-hackers.org/scripting/newbie_traps
  * http://tldp.org/LDP/abs/html/
  * Tips for interactive Bash: http://samrowe.com/wordpress/advancing-in-the-bash-shell/
- * For reference, [Google's Bash styleguide](http://google-styleguide.googlecode.com/svn/trunk/shell.xml)
+ * For reference, [Google's Bash styleguide](https://google.github.io/styleguide/shell.xml)
  * For linting, [shellcheck](https://github.com/koalaman/shellcheck)
 
 ## Examples
