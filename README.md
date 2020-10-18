@@ -22,8 +22,11 @@ Keep in mind this is not for general shell scripting, these are rules specifical
  * Always use `local` when setting variables, unless there is reason to use `declare`
    * Exception being rare cases when you are intentionally setting a variable in an outer scope.
  * Variable names should be lowercase unless exported to environment.
- * Always use `set -eo pipefail`. Fail fast and be aware of exit codes. 
-   * Use `|| true` on programs that you intentionally let exit non-zero.
+ * Fail fast and be aware of exit codes
+   * Always use `set -uo pipefail` (fail on unset variables, and fail if any command in a pipeline fails)
+   * Consider also using `set -e` (terminate script on _any_ non-zero exit), with an ERR trap
+     * Use `|| true` on programs that you intentionally let exit non-zero.
+   * Use something like `: ${arg:?Expected argument 'arg'}` when you don't have time to do proper argument parsing
  * Never use deprecated style. Most notably:
    * Define functions as `myfunc() { ... }`, not `function myfunc { ... }`
    * Always use `[[` instead of `[` or `test`
