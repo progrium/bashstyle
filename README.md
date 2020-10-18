@@ -6,7 +6,7 @@ Bash is the JavaScript of systems programming. Although in some cases it's bette
  * It's neutral. Unlike Ruby, Python, JavaScript, or PHP, Bash offends equally across all communities. ;)
  * It's made to be glue. Write complex parts in C or Go (or whatever!), and glue them together with Bash.
 
-This document is how I write Bash and how I'd like collaborators to write Bash with me in my open source projects. It's based on a lot of experience and time collecting best practices. Most of them come from these [two](http://wiki.bash-hackers.org/scripting/obsolete) [articles](http://www.kfirlavi.com/blog/2012/11/14/defensive-bash-programming/), but here integrated, slightly modified, and focusing on the most bang for buck items. Plus some new stuff!
+This document is how I write Bash and how I'd like collaborators to write Bash with me in my open source projects. It's based on a lot of experience and time collecting best practices. Most of them come from these [two](http://wiki.bash-hackers.org/scripting/obsolete) [articles](https://web.archive.org/web/20180917174959/http://www.kfirlavi.com/blog/2012/11/14/defensive-bash-programming), but here integrated, slightly modified, and focusing on the most bang for buck items. Plus some new stuff!
 
 Keep in mind this is not for general shell scripting, these are rules specifically for Bash and can take advantage of assumptions around Bash as the interpreter. 
 
