@@ -12,7 +12,7 @@ Keep in mind this is not for general shell scripting, these are rules specifical
 
 ## Big Rules
 
- * Always double quote variables, including subshells. No naked `$` signs
+ * Always double quote variables, including subshells. No naked `$` signs, unless the variable uses numbers and you are doing a comparison, putting quotes to the variable change the number to string and generate errors at the time of the comparison using `-ne`, `-eq`, `-lt`, `-le`, `-gt` or `-ge`, if you will do comparisons with string variables containing numbers, use the `expr` command.
    * This rule gets you pretty far. Read http://mywiki.wooledge.org/Quotes for details
  * All code goes in a function. Even if it's one function, `main`. 
    * Unless a library script, you can do global script settings and call `main`. That's it.
@@ -29,13 +29,14 @@ Keep in mind this is not for general shell scripting, these are rules specifical
    * Always use `[[` instead of `[` or `test`
    * Never use backticks, use `$( ... )`
    * See http://wiki.bash-hackers.org/scripting/obsolete for more
- * Prefer absolute paths (leverage $PWD), always qualify relative paths with `./`.
+ * Prefer absolute paths (leverage $PWD), always qualify relative paths with `./` (dot refers the same folder where you are placed).
  * Always use `declare` and name variable arguments at the top of functions that are more than 2-lines
    * Example: `declare arg1="$1" arg2="$2"`
    * The exception is when defining variadic functions. See below.
  * Use `mktemp` for temporary files, always cleanup with a `trap`.
  * Warnings and errors should go to STDERR, anything parsable should go to STDOUT.
  * Try to localize `shopt` usage and disable option when finished.
+ * For 
 
 If you know what you're doing, you can bend or break some of these rules, but generally they will be right and be extremely helpful.
 
